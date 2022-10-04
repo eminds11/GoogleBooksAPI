@@ -7,6 +7,7 @@ namespace HTTPClientDEMO.Models
 {
     public class VolumeListViewModel
     {
-        public List<VolumeInfo> VolumeInfo { get; set; }
+        public List<VolumeInfo> VolumeList { get; set; }
+
     }
 }

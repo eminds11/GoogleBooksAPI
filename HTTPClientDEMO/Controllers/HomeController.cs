@@ -19,7 +19,7 @@ namespace HTTPClientDEMO.Controllers
         private readonly IHttpClientFactory _clientFactory;
         public BookDetail bookDetails { get; set; }
         public VolumeInfo volumeInfo{ get; set; }
-        public List<VolumeInfo> volumeList { get; set; }
+        public List<VolumeInfo> volumeListVM { get; set; }
 
         public HomeController(IHttpClientFactory clientFactory)
         {
@@ -79,30 +79,24 @@ namespace HTTPClientDEMO.Controllers
                 var googleBookDetail = await JsonSerializer.DeserializeAsync<GoogleBookDetail>(responseStream);
                 volumeInfo = googleBookDetail.Items.First().VolumeInfo;
 
-                Console.WriteLine(googleBookDetail.Items.Count);
-
-                var itemList = googleBookDetail.Items;
-
-                IList<VolumeInfo> volumeList = new List<VolumeInfo>();
-
-                foreach (var v in itemList)
+                var volList = googleBookDetail.Items.Select(i=>i.VolumeInfo).ToList();
+                
+                var volumeListVM = new VolumeListViewModel
                 {
-                    Console.WriteLine(v.VolumeInfo.Title);
-                    volumeList.Add(v.VolumeInfo);
-                }
+                    VolumeList = volList
+                };
+
+                return View("Index2", volumeListVM);
             }
             else
             {
-                volumeInfo = new VolumeInfo();
+                //volumeInfo = new VolumeInfo();
+                volumeListVM = new List<VolumeInfo>();
             }
 
-            return View("Index2", volumeList);
+            // is this still required????
+            return View("Index2", volumeListVM);
         }
-
-        //public IActionResult Index2(VolumeInfo volumeInfo)
-        //{
-        //    return View(volumeInfo);
-        //}
 
         public IActionResult Privacy()
         {

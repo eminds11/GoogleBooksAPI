@@ -1,18 +1,29 @@
 ﻿
 @{
     ViewData["Title"] = "Home Page";
-
 }
-@model VolumeInfo
 
+@*@model VolumeInfo*@
 
+@model HTTPClientDEMO.Models.VolumeListViewModel
 
 <div>
+    @if (Model == null)
+    {
+        <span style="color:red">no items found</span>
+    }
+    else
+    {
+        @foreach (var item in Model.VolumeList)
+        {
+            @Html.DisplayFor(modelItem => item.Title)
+        }
+    }
 
 </div>
-    @*<div class="text-center">
+<div class="text-center">
 
-        <h1 class="display-4">Book Details</h1>
+        <h1 class="display-4">Book Search Results</h1>
 
         <table class="table table-bordered table-hover">
             <tr>
@@ -21,28 +32,32 @@
                 <td>Authors</td>
                 <td>Description</td>
             </tr>
-            <tr class="table-info">
-                <td>@Model.Title</td>
-                <td>@Model.Subtitle</td>
-                <td>
-                    @foreach (var item in Model.Authors)
-                    {
-                        @Html.DisplayFor(modelItem => item)
-                    }
-                </td>
-                <td>@Model.Description</td>
-                <td>@Model.PageCount</td>
-                <td>@Model.Publisher</td>
+            @foreach (var item in Model.VolumeList)
+            {
+                <tr class="table-info">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Subtitle)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Authors)
+                        @*@foreach (var i in item.Authors)
+        {
+            @Html.DisplayFor(modelItem => item.Authors)
+        }*@
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => @item.Description)</td>
+                </tr>
 
-            </tr>
+            }
         </table>
-    </div>*@
+    </div>
 
 
-
-    <h2>Other properties required</h2>
-    <p>Is book already in myLibrary</p>
-    <p>Has myBook been borrowed? Who currently has book?</p>
-    <p>Location of myBook</p>
-    <p>Does anyone else in any of the groups have the book? bookInGroup</p>
+<br />
+<h2>Other properties required</h2>
+<p>Is book already in myLibrary</p>
+<p>Has myBook been borrowed? Who currently has book?</p>
+<p>Location of myBook</p>
+<p>Does anyone else in any of the groups have the book? bookInGroup</p>
 
