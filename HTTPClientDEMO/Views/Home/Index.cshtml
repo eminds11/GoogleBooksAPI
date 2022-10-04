@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+@model BookDetail
+
+<div class="text-center">
+    <h1 class="display-4">Index</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1 class="display-4">Book Details</h1>
+
+        <table class="table table-bordered table-hover">
+
+        <tr class="table-info">
+            <td>@Model.userId</td>
+            <td>@Model.id.</td>
+            <td>@Model.title.</td>
+            <td>@Model.completed</td>
+
+        </tr>
+        
+        </table>
+
+
+</div>

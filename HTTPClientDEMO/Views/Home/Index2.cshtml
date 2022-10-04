@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+@model VolumeInfo
+
+
+
+<div>
+
+</div>
+    @*<div class="text-center">
+
+        <h1 class="display-4">Book Details</h1>
+
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>Title</td>
+                <td>Subtitle</td>
+                <td>Authors</td>
+                <td>Description</td>
+            </tr>
+            <tr class="table-info">
+                <td>@Model.Title</td>
+                <td>@Model.Subtitle</td>
+                <td>
+                    @foreach (var item in Model.Authors)
+                    {
+                        @Html.DisplayFor(modelItem => item)
+                    }
+                </td>
+                <td>@Model.Description</td>
+                <td>@Model.PageCount</td>
+                <td>@Model.Publisher</td>
+
+            </tr>
+        </table>
+    </div>*@
+
+
+
+    <h2>Other properties required</h2>
+    <p>Is book already in myLibrary</p>
+    <p>Has myBook been borrowed? Who currently has book?</p>
+    <p>Location of myBook</p>
+    <p>Does anyone else in any of the groups have the book? bookInGroup</p>
+

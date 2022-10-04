@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<h2>Search for a Book</h2>
+
+
+<form asp-controller="Home" asp-action="Index1" method="post">
+    <p>
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Search by Title" />
+        <input type="hidden" name="SearchType" value="intitle" />
+    </p>
+</form>
+<form asp-controller="Home" asp-action="Index1" method="post">
+    <p>
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Search by Author" />
+        <input type="hidden" name="SearchType" value="inauthor" />
+    </p>
+</form>
+<form asp-controller="Home" asp-action="Index1" method="post">
+    <p>
+        <input type="text" name="SearchString" />
+        <input type="submit" value="Search by ISBN Number" />
+        <input type="hidden" name="SearchType" value="isbn" />
+    </p>
+</form>
+
+
