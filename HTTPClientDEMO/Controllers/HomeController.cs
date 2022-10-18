@@ -102,5 +102,45 @@ namespace HTTPClientDEMO.Controllers
         {
             return View();
         }
+
+        // GET: Home/ShowDetail/999 - show book details by isbn nr
+        [HttpGet]
+        [Route("Home/ShowDetail/{ISBN}")]
+        public async Task<IActionResult> ShowDetail(string ISBN)
+        {
+            var temp = ISBN;
+            ViewBag.isbn = temp;
+            ViewBag.number = 12345;
+
+
+            var request = new HttpRequestMessage(HttpMethod.Get,
+   //                "https://www.googleapis.com/books/v1/volumes?q=isbn:9781847946249&key=AIzaSyCp7hT6VbwagdF3KVNFUaHH9GvFDZ1oAFk");
+   "https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN + "&key=AIzaSyCp7hT6VbwagdF3KVNFUaHH9GvFDZ1oAFk");
+
+            var client = _clientFactory.CreateClient();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = client.SendAsync(request).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseStream = await response.Content.ReadAsStreamAsync();
+                var googleBookDetail = await JsonSerializer.DeserializeAsync<GoogleBookDetail>(responseStream);
+
+                volumeInfo = googleBookDetail.Items.First().VolumeInfo;
+
+                var volList = googleBookDetail.Items.Select(i => i.VolumeInfo).ToList();
+
+                var volumeListVM = new VolumeListViewModel
+                {
+                    VolumeList = volList
+                };
+
+                return View(volumeInfo);
+            }
+
+            return View();
+        }
     }
 }

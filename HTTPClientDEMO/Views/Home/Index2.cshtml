@@ -31,23 +31,34 @@
                 <td>Subtitle</td>
                 <td>Authors</td>
                 <td>Description</td>
+                <td>ISBN</td>
+                <td>Actions</td>
             </tr>
             @foreach (var item in Model.VolumeList)
             {
-                <tr class="table-info">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => item.Subtitle)</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Authors)
-                        @*@foreach (var i in item.Authors)
-        {
-            @Html.DisplayFor(modelItem => item.Authors)
-        }*@
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => @item.Description)</td>
-                </tr>
+        <tr class="table-info">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.Subtitle)</td>
+            <td>
+                @for (int i = 0; i < item.Authors.Count; i++)
+                {
+                    @Html.DisplayFor(modelItem => item.Authors[i])
+                }
+            </td>
+            <td>@Html.DisplayFor(modelItem => @item.Description)</td>
+            <td>
+                @for (int i = 0; i < item.IndustryIdentifiers.Count; i++)
+                {
+                        @Html.DisplayFor(modelItem => item.IndustryIdentifiers[i].Identifier)
+                }
+            </td>
+            <td>
+                <a asp-action="ShowDetail" asp-route-id="@item.IndustryIdentifiers[1].Identifier">Details</a>
+
+            </td>
+        </tr>
 
             }
         </table>

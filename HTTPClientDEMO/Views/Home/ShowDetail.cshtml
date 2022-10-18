@@ -1,0 +1,36 @@
+﻿
+@model VolumeInfo
+
+
+<div class="container" style="mt6 p5">
+    <h2>Book detail</h2>
+</div>
+
+<div class="container p-5 my-5 border"><div>
+
+    <img src="@Model.ImageLinks.Thumbnail" style="height:200px" />
+
+    <p>Title : @Model.Title</p>
+    <p>Description : @Model.Description</p>
+    <p>Page Count : @Model.PageCount</p>
+
+    <p>CATEGORIES</p>
+    @for (int i = 0; i < Model.Categories.Count; i++)
+    {
+        <p>@Html.DisplayFor(modelItem => Model.Categories[i])</p>
+    }
+
+    <p>AUTHORS</p>
+
+    @for (int i = 0; i < Model.Authors.Count; i++)
+    {
+        <p>@Html.DisplayFor(modelItem => Model.Authors[i])</p>
+    }
+
+    <p>INDUSTRY IDENTIFIERS</p>
+    @for (int i = 0; i < Model.IndustryIdentifiers.Count; i++)
+    {
+        <p>@Html.DisplayFor(modelItem => Model.IndustryIdentifiers[i].Identifier)</p>
+    }
+
+</div>
